@@ -35,7 +35,8 @@
             <table class="table table-striped table-bordered">
               <thead>
                 <tr>
-                  <th width="35%">Post Title</th>
+                  <th width="15%">Post Title</th>
+                  <th width="20%">Author</th>
                   <th width="50%">Post Description</th>
                   <th width="15%">Publish Date</th>
                 </tr>
@@ -66,10 +67,12 @@
 
     var _token = $('input[name="_token"]').val();
 
-    fetch_data();
+    fetchMyData();
 
-    function fetch_data(from_date = '', to_date = '')
-    {
+    function fetchMyData(
+      from_date = '', 
+      to_date = ''
+    ) {
       $.ajax({
         url:"{{ route('daterange.fetch_data') }}",
         method:"POST",
@@ -85,9 +88,11 @@
           $('#total_records').text(data.length);
             for(var count = 0; count < data.length; count++) {
               output += '<tr>';
-              output += '<td>' + data[count].post_title + '</td>';
-              output += '<td>' + data[count].post_description + '</td>';
-              output += '<td>' + data[count].date + '</td></tr>';
+                output += '<td>' + data[count].post_title + '</td>';
+                output += '<td>' + data[count].author + '</td>';
+                output += '<td>' + data[count].post_description + '</td>';
+                output += '<td>' + data[count].date + '</td>';
+              output += '</tr>';
           }
           $('tbody').html(output);
         }
@@ -99,7 +104,7 @@
       var to_date = $('#to_date').val();
 
       if(from_date != '' &&  to_date != '') {
-        fetch_data(from_date, to_date);
+        fetchMyData(from_date, to_date);
       } else {
         alert('Both Date is required');
       }
@@ -109,7 +114,7 @@
     $('#refresh').click(function(){
       $('#from_date').val('');
       $('#to_date').val('');
-      fetch_data();
+      fetchMyData();
     });
 
   });

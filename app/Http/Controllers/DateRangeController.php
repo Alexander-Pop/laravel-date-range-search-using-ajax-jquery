@@ -17,13 +17,17 @@ class DateRangeController extends Controller
 		if($request->ajax()) {
 			if($request->from_date != '' && $request->to_date != '') {
 				$data = DB::table('post')
-			 	->whereBetween(
-			 		'date', 
-			 		array($request->from_date, $request->to_date)
-			 	)->get();
+				 	->whereBetween(
+				 		'date', 
+				 		array($request->from_date, $request->to_date)
+				 	)->get();
 
 			} else {
-				$data = DB::table('post')->orderBy('date', 'desc')->get();
+				$data = DB::table('post')
+					->orderBy(
+						'date', 
+						'desc'
+					)->get();
 			}
 			
 			echo json_encode($data);
