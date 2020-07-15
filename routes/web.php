@@ -16,3 +16,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get(
+	'/daterange', 
+	'DateRangeController@index'
+);
+
+Route::post(
+	'/daterange/fetch_data', 
+	'DateRangeController@fetch_data'
+)->name('daterange.fetch_data');
