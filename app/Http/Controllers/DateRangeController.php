@@ -20,12 +20,12 @@ class DateRangeController extends Controller
 			 	->whereBetween(
 			 		'date', 
 			 		array($request->from_date, $request->to_date)
-			 	)
-			 	->get();
+			 	)->get();
 
 			} else {
 				$data = DB::table('post')->orderBy('date', 'desc')->get();
 			}
+			
 			echo json_encode($data);
 		}
     }
